@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "771608528950",
+    "project_id": "spotai123",
+    "storage_bucket": "spotai123.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771608528950:android:71265c3e51c1911edcb097",
+        "android_client_info": {
+          "package_name": "com.example.spotify_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzFO_5ZoQmSAX4HmPjhnyfmztkp8qLX_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
