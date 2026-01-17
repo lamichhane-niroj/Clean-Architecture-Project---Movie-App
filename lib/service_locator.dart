@@ -11,10 +11,16 @@ import 'package:spotify_clone/domain/auth/usecases/is_signed_in.dart';
 import 'package:spotify_clone/domain/auth/usecases/signin.dart';
 import 'package:spotify_clone/domain/auth/usecases/signup.dart';
 import 'package:spotify_clone/domain/movie/repositories/movie.dart';
+import 'package:spotify_clone/domain/movie/usecases/get_movie_trailer.dart';
 import 'package:spotify_clone/domain/movie/usecases/get_now_playing_movies.dart';
+import 'package:spotify_clone/domain/movie/usecases/get_recommended_movies.dart';
+import 'package:spotify_clone/domain/movie/usecases/get_similar_movies.dart';
 import 'package:spotify_clone/domain/movie/usecases/get_trending_movies.dart';
 import 'package:spotify_clone/domain/tv/repositories/tv_content.dart';
 import 'package:spotify_clone/domain/tv/usecases/get_popular_tv_content.dart';
+import 'package:spotify_clone/domain/tv/usecases/get_recommended_tv.dart';
+import 'package:spotify_clone/domain/tv/usecases/get_similar_tv.dart';
+import 'package:spotify_clone/domain/tv/usecases/get_tv_trailer.dart';
 
 final sl = GetIt.instance;
 
@@ -38,4 +44,11 @@ void setupServiceLocator() {
   sl.registerSingleton<GetTrendingMoviesUseCase>(GetTrendingMoviesUseCase());
   sl.registerSingleton<GetNowPlayingMoviesUseCase>(GetNowPlayingMoviesUseCase());
   sl.registerSingleton<GetPopularTvContentUseCase>(GetPopularTvContentUseCase());
+  sl.registerSingleton<GetMovieTrailerUseCase>(GetMovieTrailerUseCase());
+  sl.registerSingleton<GetRecommendedMoviesUseCase>(GetRecommendedMoviesUseCase());
+  sl.registerSingleton<GetSimilarMoviesUseCase>(GetSimilarMoviesUseCase());
+
+  sl.registerSingleton<GetTvTrailerUseCase>(GetTvTrailerUseCase());
+  sl.registerSingleton<GetRecommendedTvUseCase>(GetRecommendedTvUseCase());
+  sl.registerSingleton<GetSimilarTvUseCase>(GetSimilarTvUseCase());
 }

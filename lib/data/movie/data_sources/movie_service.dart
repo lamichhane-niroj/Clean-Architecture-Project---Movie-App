@@ -7,6 +7,9 @@ import 'package:spotify_clone/service_locator.dart';
 abstract class MovieService {
   Future<Either> getTrendingMovies();
   Future<Either> getNowPlayingMovies();
+  Future<Either> getMovieTrailer(int id);
+  Future<Either> getRecommendedMovie(int id);
+  Future<Either> getSimilarMovie(int id);
 }
 
 class MovieServiceImpl implements MovieService {
@@ -24,6 +27,39 @@ class MovieServiceImpl implements MovieService {
   Future<Either> getNowPlayingMovies() async {
     try {
       var response = await sl<DioClient>().get(ApiUrl.nowPlayingMovies);
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(e.response?.data["message"] ?? "An error occurred");
+    }
+  }
+
+  @override
+  Future<Either> getMovieTrailer(int id) async {
+    try {
+      final endPoint = "${ApiUrl.movie}$id/trailer";
+      var response = await sl<DioClient>().get(endPoint);
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(e.response?.data["message"] ?? "An error occurred");
+    }
+  }
+
+  @override
+  Future<Either> getRecommendedMovie(int id) async {
+    try {
+      final endPoint = "${ApiUrl.movie}$id/recommendations";
+      var response = await sl<DioClient>().get(endPoint);
+      return Right(response.data);
+    } on DioException catch (e) {
+      return Left(e.response?.data["message"] ?? "An error occurred");
+    }
+  }
+
+  @override
+  Future<Either> getSimilarMovie(int id) async {
+    try {
+      final endPoint = "${ApiUrl.movie}$id/similar";
+      var response = await sl<DioClient>().get(endPoint);
       return Right(response.data);
     } on DioException catch (e) {
       return Left(e.response?.data["message"] ?? "An error occurred");
