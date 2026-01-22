@@ -5,17 +5,17 @@ import 'package:spotify_clone/core/network/dio_client.dart';
 import 'package:spotify_clone/service_locator.dart';
 
 abstract class MovieService {
-  Future<Either> getTrendingMovies();
-  Future<Either> getNowPlayingMovies();
-  Future<Either> getMovieTrailer(int id);
-  Future<Either> getRecommendedMovie(int id);
-  Future<Either> getSimilarMovie(int id);
-  Future<Either> searchMovie(String query);
+  Future<Either<String, Map<String, dynamic>>> getTrendingMovies();
+  Future<Either<String, Map<String, dynamic>>> getNowPlayingMovies();
+  Future<Either<String, Map<String, dynamic>>> getMovieTrailer(int id);
+  Future<Either<String, Map<String, dynamic>>> getRecommendedMovie(int id);
+  Future<Either<String, Map<String, dynamic>>> getSimilarMovie(int id);
+  Future<Either<String, Map<String, dynamic>>> searchMovie(String query);
 }
 
 class MovieServiceImpl implements MovieService {
   @override
-  Future<Either> getTrendingMovies() async {
+  Future<Either<String, Map<String, dynamic>>> getTrendingMovies() async {
     try {
       var response = await sl<DioClient>().get(ApiUrl.trendingMovies);
       return Right(response.data);
@@ -25,7 +25,7 @@ class MovieServiceImpl implements MovieService {
   }
 
   @override
-  Future<Either> getNowPlayingMovies() async {
+  Future<Either<String, Map<String, dynamic>>> getNowPlayingMovies() async {
     try {
       var response = await sl<DioClient>().get(ApiUrl.nowPlayingMovies);
       return Right(response.data);
@@ -35,7 +35,7 @@ class MovieServiceImpl implements MovieService {
   }
 
   @override
-  Future<Either> getMovieTrailer(int id) async {
+  Future<Either<String, Map<String, dynamic>>> getMovieTrailer(int id) async {
     try {
       final endPoint = "${ApiUrl.movie}$id/trailer";
       var response = await sl<DioClient>().get(endPoint);
@@ -46,7 +46,9 @@ class MovieServiceImpl implements MovieService {
   }
 
   @override
-  Future<Either> getRecommendedMovie(int id) async {
+  Future<Either<String, Map<String, dynamic>>> getRecommendedMovie(
+    int id,
+  ) async {
     try {
       final endPoint = "${ApiUrl.movie}$id/recommendations";
       var response = await sl<DioClient>().get(endPoint);
@@ -57,7 +59,7 @@ class MovieServiceImpl implements MovieService {
   }
 
   @override
-  Future<Either> getSimilarMovie(int id) async {
+  Future<Either<String, Map<String, dynamic>>> getSimilarMovie(int id) async {
     try {
       final endPoint = "${ApiUrl.movie}$id/similar";
       var response = await sl<DioClient>().get(endPoint);
@@ -68,7 +70,7 @@ class MovieServiceImpl implements MovieService {
   }
 
   @override
-  Future<Either> searchMovie(String query) async {
+  Future<Either<String, Map<String, dynamic>>> searchMovie(String query) async {
     try {
       final endPoint = "${ApiUrl.search}movie/$query";
       var response = await sl<DioClient>().get(endPoint);

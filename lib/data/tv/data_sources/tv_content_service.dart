@@ -5,16 +5,16 @@ import 'package:spotify_clone/core/network/dio_client.dart';
 import 'package:spotify_clone/service_locator.dart';
 
 abstract class TvContentService {
-  Future<Either> getPopularTv();
-  Future<Either> getTvTrailer(int id);
-  Future<Either> getRecommendedTv(int id);
-  Future<Either> getSimilarTv(int id);
-  Future<Either> searchTv(String query);
+  Future<Either<String, Map<String, dynamic>>> getPopularTv();
+  Future<Either<String, Map<String, dynamic>>> getTvTrailer(int id);
+  Future<Either<String, Map<String, dynamic>>> getRecommendedTv(int id);
+  Future<Either<String, Map<String, dynamic>>> getSimilarTv(int id);
+  Future<Either<String, Map<String, dynamic>>> searchTv(String query);
 }
 
 class TvContentServiceImpl extends TvContentService {
   @override
-  Future<Either> getPopularTv() async {
+  Future<Either<String, Map<String, dynamic>>> getPopularTv() async {
     try {
       var response = await sl<DioClient>().get(ApiUrl.popularTvShows);
       return Right(response.data);
@@ -24,7 +24,7 @@ class TvContentServiceImpl extends TvContentService {
   }
 
   @override
-  Future<Either> getRecommendedTv(int id) async {
+  Future<Either<String, Map<String, dynamic>>> getRecommendedTv(int id) async {
     try {
       final endPoint = "${ApiUrl.tv}$id/recommendations";
       var response = await sl<DioClient>().get(endPoint);
@@ -35,7 +35,7 @@ class TvContentServiceImpl extends TvContentService {
   }
 
   @override
-  Future<Either> getSimilarTv(int id) async {
+  Future<Either<String, Map<String, dynamic>>> getSimilarTv(int id) async {
     try {
       final endPoint = "${ApiUrl.tv}$id/similar";
       var response = await sl<DioClient>().get(endPoint);
@@ -46,7 +46,7 @@ class TvContentServiceImpl extends TvContentService {
   }
 
   @override
-  Future<Either> getTvTrailer(int id) async {
+  Future<Either<String, Map<String, dynamic>>> getTvTrailer(int id) async {
     try {
       final endPoint = "${ApiUrl.tv}$id/trailers";
       var response = await sl<DioClient>().get(endPoint);
@@ -57,7 +57,7 @@ class TvContentServiceImpl extends TvContentService {
   }
 
   @override
-  Future<Either> searchTv(String query) async {
+  Future<Either<String, Map<String, dynamic>>> searchTv(String query) async {
     try {
       final endPoint = "${ApiUrl.search}tv/$query";
       var response = await sl<DioClient>().get(endPoint);
