@@ -28,9 +28,7 @@ class TvContentRepositoryImpl extends TvContentRepository {
     return returnedData.fold((error) => Left(error), (data) {
       var trailer = data['trailers'];
       var trailers = List.from(trailer)
-          .map(
-            (item) => TrailerMapper.toEntity(TrailerModel.fromJson(item)),
-          )
+          .map((item) => TrailerMapper.toEntity(TrailerModel.fromJson(item)))
           .toList();
       return Right(trailers[0]);
     });
@@ -52,6 +50,19 @@ class TvContentRepositoryImpl extends TvContentRepository {
   @override
   Future<Either> getRecommendedTv(int id) async {
     var returnedData = await sl<TvContentService>().getRecommendedTv(id);
+    return returnedData.fold((error) => Left(error), (data) {
+      var tvShows = List.from(data["content"])
+          .map(
+            (item) => TvContentMapper.toEntity(TvContentModel.fromJson(item)),
+          )
+          .toList();
+      return Right(tvShows);
+    });
+  }
+
+  @override
+  Future<Either> searchTv(String query) async {
+    var returnedData = await sl<TvContentService>().searchTv(query);
     return returnedData.fold((error) => Left(error), (data) {
       var tvShows = List.from(data["content"])
           .map(

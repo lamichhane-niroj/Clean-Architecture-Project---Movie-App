@@ -7,6 +7,7 @@ class ApiUrl {
   static const String popularTvShows = "api/v1/tv/popular/";
   static const String movie = "api/v1/movie/";
   static const String tv = "api/v1/tv/";
+  static const String search = "api/v1/search/";
 
   static const String trailerBase = "https://www.youtube.com/watch?v=";
 }

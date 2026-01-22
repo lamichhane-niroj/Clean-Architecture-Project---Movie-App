@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/common/helper/app_navigation/app_navigation.dart';
-import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/domain/movie/entities/movie.dart';
 import 'package:spotify_clone/presentation/watch/pages/movie_watch.dart';
 
@@ -29,7 +28,7 @@ class MovieCard extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: NetworkImage(
-                      AppImages.moviesImageBasePath + movieEntity.posterPath!,
+                      movieEntity.providePosterPath()
                     ),
                   ),
                   borderRadius: const BorderRadius.only(

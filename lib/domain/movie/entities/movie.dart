@@ -1,3 +1,5 @@
+import 'package:spotify_clone/core/configs/assets/app_images.dart';
+
 class MovieEntity {
   MovieEntity({
     required this.adult,
@@ -32,4 +34,12 @@ class MovieEntity {
   final bool? video;
   final double? voteAverage;
   final int? voteCount;
+
+  String providePosterPath() {
+    if (posterPath != null) {
+      return AppImages.moviesImageBasePath + posterPath!;
+    } else {
+      return AppImages.defaultImage;
+    }
+  }
 }

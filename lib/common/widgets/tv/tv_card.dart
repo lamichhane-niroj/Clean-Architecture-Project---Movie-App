@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/common/helper/app_navigation/app_navigation.dart';
-import 'package:spotify_clone/core/configs/assets/app_images.dart';
 import 'package:spotify_clone/domain/tv/entities/tv_content.dart';
 import 'package:spotify_clone/presentation/watch_tv/pages/tv_watch.dart';
 
@@ -28,9 +27,7 @@ class TvCard extends StatelessWidget {
                   color: Colors.white,
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(
-                      AppImages.moviesImageBasePath + tvEntity.posterPath!,
-                    ),
+                    image: NetworkImage(tvEntity.providePosterPath()),
                   ),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
